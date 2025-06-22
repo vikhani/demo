@@ -23,7 +23,7 @@ public class Pokemon {
     private Long id;
 
     @Column(name = "pokemon_api_id", nullable = false)
-    private Integer pokemonApiId;
+    private Long pokemonApiId;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;

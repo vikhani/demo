@@ -32,8 +32,12 @@ public class PokemonService {
         }
 
         Pokemon pokemonEntity = pokemonResponseToPokemonMapper.toEntity(pokemon.get());
-
-        pokemonRepository.save(pokemonEntity);
+        if (!pokemonRepository.existsByPokemonApiId(pokemonEntity.getPokemonApiId())) {
+            pokemonRepository.save(pokemonEntity);
+        } else {
+            log.info("Pokemon \"{}\" with pokemonApiId {} is already present.",
+                    pokemonEntity.getName(), pokemonEntity.getPokemonApiId());
+        }
     }
 
     private Optional<PokemonApiResponse> getPokemonApiResponse() {

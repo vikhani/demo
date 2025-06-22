@@ -4,4 +4,5 @@ import com.example.demo.model.db.Pokemon;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
+    boolean existsByPokemonApiId(Long pokemonApiId);
 }
