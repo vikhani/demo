@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Slf4j
@@ -31,12 +32,14 @@ public class PokemonService {
             return;
         }
 
+        var report = BigDecimal.TEN;
         Pokemon pokemonEntity = pokemonResponseToPokemonMapper.toEntity(pokemon.get());
         if (!pokemonRepository.existsByPokemonApiId(pokemonEntity.getPokemonApiId())) {
             pokemonRepository.save(pokemonEntity);
         } else {
             log.info("Pokemon \"{}\" with pokemonApiId {} is already present.",
                     pokemonEntity.getName(), pokemonEntity.getPokemonApiId());
+            throw new RuntimeException("test");
         }
     }
 
